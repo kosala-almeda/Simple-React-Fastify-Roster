@@ -1,26 +1,40 @@
 // App.js
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import HomePage from './pages/HomePage';
-import RoasterPage from './pages/RoasterPage';
+import RosterPage from './pages/RosterPage';
+import 'bootstrap/dist/css/bootstrap.css';
 import './App.css'; 
-import 'bootstrap/dist/css/bootstrap.css'
+
+const staffTypes = [
+  'Waiters',
+  'Cooks'
+];
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/waiters">
-          <RoasterPage staffType="Waiters" />
-        </Route>
-        <Route path="/cooks">
-          <RoasterPage staffType="Cooks" />
-        </Route>
+        {staffTypes.map((staffType) => (
+          <Route key={staffType} path={`/${staffType}`}>
+            <RosterPage staffType={staffType} staffTypes={staffTypes} />
+          </Route>
+        ))}
         <Route path="/">
-          <HomePage />
+          <HomePage staffTypes={staffTypes} />
         </Route>
       </Switch>
     </Router>
+  );
+}
+
+function HomePage({ staffTypes }) {
+  return (
+    <div>
+      <h1>Welcome to the Staff Roster App</h1>
+      {staffTypes.map((staffType) => (
+        <a key={staffType.id} href={`/${staffType.id}`}>View {staffType.label}</a>
+      ))}
+    </div>
   );
 }
 

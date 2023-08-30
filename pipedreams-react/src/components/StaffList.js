@@ -1,17 +1,26 @@
-// StaffList.js
+// components/StaffList.js
 import React from 'react';
 
 function StaffList({ staffData }) {
+  
   if (!staffData) {
-    return <p>Loading...</p>;
+    return <p>Loading staff data...</p>;
   }
 
   return (
-    <ul>
-      {staffData.map((staffMember) => (
-        <li key={staffMember.id}>{staffMember.name}</li>
-      ))}
-    </ul>
+    <div className="container mt-3">
+      <div className="row justify-content-center">
+        <div className="col-md-4">
+          <ul className="list-group">
+            {staffData.map((staffMember) => (
+              <li className="list-group-item">
+                {staffMember}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
   );
 }
 
