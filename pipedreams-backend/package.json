@@ -1,0 +1,11 @@
+{
+  "name": "pipedreams-backend",
+  "version": "0.1.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "dependencies": {
+    "fastify": "^4.22.0"
+  }
+}
