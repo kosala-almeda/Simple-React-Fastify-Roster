@@ -12,12 +12,12 @@ function StaffPage({ staffType, staffTypes }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await fetchStaffData(staffType, currentDay.toLowerCase());
+      const data = await fetchStaffData(staffType);
       setStaffData(data);
     };
 
     fetchData();
-  }, [staffType, /*currentDay*/]);
+  }, [staffType]);
 
   const handleDayChange = (newDay) => {
     setCurrentDay(newDay);
