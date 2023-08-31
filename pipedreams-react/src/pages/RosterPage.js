@@ -1,55 +1,50 @@
 // pages/StaffPage.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { DayContext } from '../App';
 import StaffList from '../components/StaffList';
-import { previousDay, nextDay } from '../utils/DateUtils';
+import DayNavigator from '../components/DayNavigator';
+import StaffNavigator from '../components/StaffNavigator';
 import { fetchStaffData } from '../services/StaffService';
 
 function StaffPage({ staffType, staffTypes }) {
-  const [currentDay, setCurrentDay] = useState('Monday');
-  const [staffData, setStaffData] = useState({});
+  const { currentDay, setCurrentDay } = useContext(DayContext);
+  const [staffData, setStaffData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await fetchStaffData(staffType);
+      const data = await fetchStaffData(staffType, currentDay.toLowerCase());
       setStaffData(data);
     };
 
     fetchData();
-  }, [staffType]);
+  }, [staffType, /*currentDay*/]);
+
+  const handleDayChange = (newDay) => {
+    setCurrentDay(newDay);
+  };
 
   return (
-    <div className="container mt-5">
-      <div className="d-flex justify-content-center mb-3">
-        {staffTypes.map((type) => (
-          <a
-            key={type.id}
-            className={`btn btn-${type === staffType ? 'primary selected-btn' : 'light text-decoration-underline'} m-2`}
-            href={`/${type}`}
-          >
-            {type}
-          </a>
-        ))}
-      </div>
+    <div className="container mt-3">
 
-      <div className="d-flex justify-content-center mb-3">
-        <button
-          className="btn btn-secondary m-2"
-          disabled={currentDay === 'Monday'}
-          onClick={() => setCurrentDay(previousDay(currentDay))}
-        >
-          &lt;
-        </button>
-        <h2>{currentDay}</h2>
-        <button
-          className="btn btn-secondary m-2"
-          disabled={currentDay === 'Friday'}
-          onClick={() => setCurrentDay(nextDay(currentDay))}
-        >
-          &gt;
-        </button>
-      </div>
+      
+      <h2 className='text-center fw-bold'>{staffType}</h2>
 
-      <StaffList staffData={staffData[currentDay.toLowerCase()]} />
+      <DayNavigator
+        currentDay={currentDay}
+        handleDayChange={handleDayChange}
+      />
+
+
+      {staffData ? (
+        <StaffList staffData={staffData[currentDay.toLowerCase()]} />
+      ) : (
+        <p>Loading staff data...</p>
+      )}
+
+      <StaffNavigator
+        staffTypes={staffTypes}
+        currentType={staffType}
+      />
     </div>
   );
 }

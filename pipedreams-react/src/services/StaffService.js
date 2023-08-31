@@ -1,7 +1,8 @@
 // StaffService.js
-const API_BASE_URL = '.'; // Replace with an API URL
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 export async function fetchStaffData(staffType) {
+    console.trace();
   try {
     const response = await fetch(`${API_BASE_URL}/Get${staffType}.json`);
     if (!response.ok) {

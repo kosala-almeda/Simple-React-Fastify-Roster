@@ -1,9 +1,11 @@
 // App.js
-import React from 'react';
+import React, {useState} from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import RosterPage from './pages/RosterPage';
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css'; 
+
+export const DayContext = React.createContext();
 
 const staffTypes = [
   'Waiters',
@@ -11,19 +13,23 @@ const staffTypes = [
 ];
 
 function App() {
+  const [currentDay, setCurrentDay] = useState('Monday');
+
   return (
-    <Router>
-      <Switch>
-        {staffTypes.map((staffType) => (
-          <Route key={staffType} path={`/${staffType}`}>
-            <RosterPage staffType={staffType} staffTypes={staffTypes} />
+    <DayContext.Provider value={{ currentDay, setCurrentDay }}>
+      <Router>
+        <Switch>
+          {staffTypes.map((staffType) => (
+            <Route key={staffType} path={`/${staffType}`}>
+              <RosterPage staffType={staffType} staffTypes={staffTypes} />
+            </Route>
+          ))}
+          <Route path="/">
+            <HomePage staffTypes={staffTypes} />
           </Route>
-        ))}
-        <Route path="/">
-          <HomePage staffTypes={staffTypes} />
-        </Route>
-      </Switch>
-    </Router>
+        </Switch>
+      </Router>
+    </DayContext.Provider>
   );
 }
 

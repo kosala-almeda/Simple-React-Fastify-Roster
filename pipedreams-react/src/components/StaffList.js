@@ -4,7 +4,7 @@ import React from 'react';
 function StaffList({ staffData }) {
   
   if (!staffData) {
-    return <p>Loading staff data...</p>;
+    return <p>No staff today</p>;
   }
 
   return (
