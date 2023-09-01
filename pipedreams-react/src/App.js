@@ -2,6 +2,7 @@
 import React, {useState} from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import RosterPage from './pages/RosterPage';
+import HomePage from './pages/HomePage';
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css'; 
 
@@ -24,23 +25,12 @@ function App() {
               <RosterPage staffType={staffType} staffTypes={staffTypes} />
             </Route>
           ))}
-          <Route path="/">
+          <Route key="home" path="/">
             <HomePage staffTypes={staffTypes} />
           </Route>
         </Switch>
       </Router>
     </DayContext.Provider>
-  );
-}
-
-function HomePage({ staffTypes }) {
-  return (
-    <div>
-      <h1>Welcome to the Staff Roster App</h1>
-      {staffTypes.map((staffType) => (
-        <a key={staffType.id} href={`/${staffType.id}`}>View {staffType.label}</a>
-      ))}
-    </div>
   );
 }
 

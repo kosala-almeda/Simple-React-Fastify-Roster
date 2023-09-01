@@ -1,48 +1,41 @@
 
-require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config();
+import fastify from 'fastify';
 
-const fastify = require('fastify');
-const { MongoClient } = require('mongodb');
+import { getCollection } from './db/db.js';
+import { loadDataIfEmpty } from './db/init.js';
+import { getCooksHandler } from './routes/cooks.js';
+// src/index.js
 
-const cooksData = require('../data/cooks.json');
-const waitersData = require('../data/waiters.json');
+import { getWaitersHandler } from './routes/waiters.js';
 
-const app = fastify({ logger: true }); // using default pino logger
-app.addHook('onSend', (request, reply, payload, next) => {
-    reply.header('Access-Control-Allow-Origin', '*');
-    next();
-});
+const createApp = () => {
+    const app = fastify({ logger: true });
+    app.addHook('onSend', (request, reply, payload, next) => {
+        reply.header('Access-Control-Allow-Origin', '*');
+        next();
+    });
+    return app;
+};
 
-const startServer = async () => {
+const startServer = async (app) => {
     try {
 
-        const client = new MongoClient(process.env.DB_URL);
-        await client.connect();
-        const db = client.db();
+        const staffCollection = await getCollection({ collectionName: 'staff' });
+        await loadDataIfEmpty({ staffCollection });
 
-        const staffCollection = db.collection('staff');
-        // Drop the "staff" collection to clean the database
-        await staffCollection.drop();
-        console.log('Dropped "staff" collection');
-
-        // Load data into the database
-        await staffCollection.insertOne({ type: 'cooks', data: cooksData })
-        await staffCollection.insertOne({ type: 'waiters', data: waitersData });
-
-        app.decorate('mongo', db);
-
-
-        app.get('/GetCooks', async () => (await staffCollection.findOne({ type: 'cooks' })).data);
-        app.get('/GetWaiters', async () => (await staffCollection.findOne({ type: 'waiters' })).data);
+        app.get('/GetCooks', getCooksHandler({ staffCollection }));
+        app.get('/GetWaiters', getWaitersHandler({ staffCollection }));
 
         const address = await app.listen({
             port: process.env.SERVER_PORT || 3000
         });
-        console.log(`Server is listening at ${address}`);
     } catch (err) {
-        console.error('Error starting server:', err);
+        console.error(err);
         process.exit(1);
     }
 };
 
-startServer();
+const app = createApp();
+startServer(app);

@@ -1,5 +1,5 @@
 // utils/dateUtils.js
-const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+const daysOfWeek = Object.freeze(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']);
 
 export function previousDay(currentDay) {
   const currentIndex = daysOfWeek.indexOf(currentDay);

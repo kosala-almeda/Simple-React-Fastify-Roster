@@ -1,15 +1,15 @@
 // HomePage.js
-import {Link} from 'react-router-dom';
 
-function HomePage() {
+import StaffNavigator from '../components/StaffNavigator';
+
+
+function HomePage({staffTypes}) {
+  console.log(staffTypes);
     return (
-      <div>
-        <h1>Welcome to the Staff App</h1>
-        <p>This is the homepage of the app.</p>
-        <ul>
-            <li><Link to="/waiters">View Waiters</Link></li>
-            <li><Link to="/cooks">View Cooks</Link></li>
-        </ul>
+      <div className="container mt-3">
+        <h2 className='text-center fw-bold'>the Staff Roster</h2>
+        <p className='text-center mt-4'>Select the staff type and the day to see the roster</p>
+        <StaffNavigator staffTypes={staffTypes} />
       </div>
     );
   }

@@ -3,10 +3,9 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 
 function StaffTypeNavigation({ staffTypes, currentType }) {
-    const history = useHistory();
+  const history = useHistory();
 
   const handleTypeChange = (newType) => {
-    // Update the URL to match the selected staff type
     history.push(`/${newType}`);
   };
 
