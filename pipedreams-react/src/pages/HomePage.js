@@ -1,10 +1,10 @@
 // HomePage.js
 
+import React from 'react';
 import StaffNavigator from '../components/StaffNavigator';
 
 
 function HomePage({staffTypes}) {
-  console.log(staffTypes);
     return (
       <div className="container mt-3">
         <h2 className='text-center fw-bold'>the Staff Roster</h2>

@@ -2,9 +2,12 @@
 import React from 'react';
 
 function StaffList({ staffData }) {
-  
-  if (!staffData) {
-    return <p>No staff today</p>;
+  if (!staffData || staffData.length === 0) {
+    return (
+      <div className="alert alert-secondary" role="alert">
+        No staff
+      </div>
+    );
   }
 
   return (
@@ -12,9 +15,9 @@ function StaffList({ staffData }) {
       <div className="row justify-content-center">
         <div className="col-md-4">
           <ul className="list-group">
-            {staffData.map((staffMember) => (
-              <li className="list-group-item">
-                {staffMember}
+            {staffData.map((staffMemberName) => (
+              <li className="list-group-item" key={staffMemberName}>
+                {staffMemberName}
               </li>
             ))}
           </ul>

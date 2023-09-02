@@ -1,4 +1,4 @@
-// components/StaffTypeNavigation.js
+// components/StaffNavigator.js
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 

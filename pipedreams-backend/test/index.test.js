@@ -43,15 +43,5 @@ describe('Server Integration Tests', () => {
     expect(address).toMatch(/(localhost|127\\.0\\.0\\.1|::1)/);
   })
 
-  // TODO: FIXME: failing tests
-
-  // it('should respond with cooks data', async () => {
-  //   const response = await request(address).get('/GetCooks');
-  //   expect(response.status).toBe(200);
-  // });
-
-  // it('should respond with waiters data', async () => {
-  //   const response = await request(address).get('/GetWaiters');
-  //   expect(response.status).toBe(200);
-  // });
+  // TODO: Add more tests
 });

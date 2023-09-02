@@ -1,4 +1,4 @@
-// pages/StaffPage.js
+// pages/RosterPage.js
 import React, { useState, useEffect, useContext } from 'react';
 import { DayContext } from '../App';
 import StaffList from '../components/StaffList';
@@ -9,11 +9,14 @@ import { fetchStaffData } from '../services/StaffService';
 function StaffPage({ staffType, staffTypes }) {
   const { currentDay, setCurrentDay } = useContext(DayContext);
   const [staffData, setStaffData] = useState(null);
+  const [staffLoading, setStaffLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
+      setStaffLoading(true)
       const data = await fetchStaffData(staffType);
       setStaffData(data);
+      setStaffLoading(false)
     };
 
     fetchData();
@@ -25,20 +28,25 @@ function StaffPage({ staffType, staffTypes }) {
 
   return (
     <div className="container mt-3">
-
+      <div className="bg-light">
+        <h2 className="text-center fw-bold">{staffType}</h2>
+      </div>
       
-      <h2 className='text-center fw-bold'>{staffType}</h2>
-
       <DayNavigator
         currentDay={currentDay}
         handleDayChange={handleDayChange}
       />
 
-
-      {staffData ? (
+      {staffLoading ? (
+        <div className="d-flex justify-content-center">
+          <div className="spinner-border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      ) : staffData ? (
         <StaffList staffData={staffData[currentDay.toLowerCase()]} />
       ) : (
-        <p>Loading staff data...</p>
+        <p className="alert alert-danger">Error fetching staff data</p>
       )}
 
       <StaffNavigator

@@ -1,12 +1,12 @@
-// components/DayNavigation.js
+// components/DayNavigator.js
 import React from 'react';
 import { previousDay, nextDay } from '../utils/DateUtils';
 
-function DayNavigation({ currentDay, handleDayChange }) {
+function DayNavigator({ currentDay, handleDayChange }) {
   return (
     <div className="d-flex justify-content-center my-2">
       <button
-        className="btn btn-secondary mx-4"
+        className="btn btn-dark mx-4"
         disabled={currentDay === 'Monday'}
         onClick={() => handleDayChange(previousDay(currentDay))}
       >
@@ -14,7 +14,7 @@ function DayNavigation({ currentDay, handleDayChange }) {
       </button>
       <h3>{currentDay}</h3>
       <button
-        className="btn btn-secondary mx-4"
+        className="btn btn-dark mx-4"
         disabled={currentDay === 'Friday'}
         onClick={() => handleDayChange(nextDay(currentDay))}
       >
@@ -24,4 +24,4 @@ function DayNavigation({ currentDay, handleDayChange }) {
   );
 }
 
-export default DayNavigation;
+export default DayNavigator;
