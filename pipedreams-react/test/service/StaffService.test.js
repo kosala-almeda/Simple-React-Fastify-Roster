@@ -25,7 +25,7 @@ describe('fetchStaffData', () => {
     });
 
     const staffType = 'Waiters';
-    const result = await fetchStaffData(staffType);
+    const result = await fetchStaffData({staffType});
 
     expect(global.fetch).toHaveBeenCalledTimes(1);
     expect(global.fetch).toHaveBeenCalledWith(`${process.env.REACT_APP_API_BASE_URL}/Get${staffType}`);
@@ -43,7 +43,7 @@ describe('fetchStaffData', () => {
   
     const staffType = 'Waiters';
     const day = 'Monday';
-    const result = await fetchStaffData(staffType, day);
+    const result = await fetchStaffData({staffType, day});
   
     expect(global.fetch).toHaveBeenCalledTimes(1);
     expect(global.fetch).toHaveBeenCalledWith(`${process.env.REACT_APP_API_BASE_URL}/Get${staffType}?day=${day}`);
@@ -60,7 +60,7 @@ describe('fetchStaffData', () => {
     global.fetch.mockRejectedValue(new Error('Network error'));
 
     const staffType = 'Waiters';
-    const result = await fetchStaffData(staffType);
+    const result = await fetchStaffData({staffType});
 
     expect(global.fetch).toHaveBeenCalledTimes(1);
     expect(global.fetch).toHaveBeenCalledWith(`${process.env.REACT_APP_API_BASE_URL}/Get${staffType}`);

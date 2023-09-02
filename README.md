@@ -55,7 +55,8 @@ npm test
   * `DB_URL` uri to mongodb database
   * `DB_COLLECTION` database collection to use
 * Please install/run mongo db
-* Note: tests might fail if ports are in-use
+* Testing framework in use is `jest`
+  * Note: tests might fail if ports are in-use
 
 ## Data
 

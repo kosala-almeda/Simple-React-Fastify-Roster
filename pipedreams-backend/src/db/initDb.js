@@ -18,14 +18,16 @@ export async function loadDataIfEmpty({ staffCollection }) {
 }
 // load data from files and insert
 async function loadData({ staffCollection }) {
-    const cooks = readJsonFile('../../data/cooks.json');
-    const waiters = readJsonFile('../../data/waiters.json');
+    console.log('Loading data into database');
 
-    await insertData(staffCollection, 'cooks', cooks);
-    await insertData(staffCollection, 'waiters', waiters);
+    const cooks = readJsonFile('./data/cooks.json');
+    const waiters = readJsonFile('./data/waiters.json');
+
+    await insertData({collection: staffCollection, type: 'cooks', data: cooks});
+    await insertData({collection: staffCollection, type: 'waiters', data: waiters});
 }
 
-async function insertData(collection, type, data) {
+async function insertData({collection, type, data}) {
     await collection.insertOne({ type, data });
 }
 
