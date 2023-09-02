@@ -1,3 +1,7 @@
+/*
+ * Testing pipedreams-backend/src/index.js
+ */
+
 import request from 'supertest';
 
 // Mock the dependencies
@@ -21,21 +25,19 @@ jest.mock('../src/routes/waiters.js', () => ({
   }),
 }));
 
-// Import the module for testing // This will execute the code in index.js without exporting anything
 
-// Your actual test cases
 describe('Server Integration Tests', () => {
 
   // moved here to prevent running during other tests
   let server;
   let address;
-
   beforeAll(async () => {
     server = require('../src/index.js');
     address = await server.address;
   });
 
   afterAll(async () => {
+    // shut down server at the end
     await server.app.close();
   });
 

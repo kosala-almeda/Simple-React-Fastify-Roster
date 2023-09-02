@@ -1,14 +1,22 @@
-// src/db/initDb.js
+/*
+ * pipedreams-backend/src/db/initDb.js
+ * 
+ * Initialize the database
+ */
 
 import { promises as fs } from 'fs';
 
+/**
+ * Load data into data base if given table is empty (or not present)
+ * @param staffCollection db table to use
+ */
 export async function loadDataIfEmpty({ staffCollection }) {
     const count = await staffCollection.countDocuments();
     if (count === 0) {
         await loadData({ staffCollection });
     }
 }
-
+// load data from files and insert
 async function loadData({ staffCollection }) {
     const cooks = readJsonFile('../../data/cooks.json');
     const waiters = readJsonFile('../../data/waiters.json');

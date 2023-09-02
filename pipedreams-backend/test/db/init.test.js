@@ -1,3 +1,7 @@
+/*
+ * Testing pipedreams-backend/src/db/init.js
+ */
+
 import { loadDataIfEmpty } from '../../src/db/initDb.js';
 import { promises as fs } from 'fs';
 
@@ -6,8 +10,6 @@ jest.mock('fs', () => ({
         readFile: jest.fn().mockResolvedValue('{}'),
     }
 }));
-
-
 
 describe('loadDataIfEmpty', () => {
     it('should not load data if count is not empty', async () => {

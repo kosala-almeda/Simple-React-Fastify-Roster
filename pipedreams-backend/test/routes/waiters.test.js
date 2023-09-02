@@ -1,4 +1,6 @@
-// src/routes/__tests__/cooks.test.js
+/*
+ * Testing pipedreams-backend/src/routes/waiters.js
+ */
 
 import { getWaitersHandler } from '../../src/routes/waiters.js';
 import { getStaffByType } from '../../src/db/staffRepository.js';

@@ -1,8 +1,11 @@
-// src/routes/__tests__/cooks.test.js
+/*
+ * Testing pipedreams-backend/src/db/staffRepository.js
+ */
 
 import { getStaffByType } from '../../src/db/staffRepository.js';
 
 describe('getStaffByType', () => {
+
   it('should return staff data', async () => {
 
     const type = 'cooks';
