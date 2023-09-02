@@ -1,4 +1,4 @@
-// src/db/init.js
+// src/db/initDb.js
 
 import { promises as fs } from 'fs';
 
