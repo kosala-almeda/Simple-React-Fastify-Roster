@@ -1,7 +1,9 @@
-/**
- *  @jest-environment jsdom
+/*
+ * @jest-environment jsdom
+ * 
+ * Testing pipedreams-react/src/pages/HomePage.js
  */
-// /test/pages/HomePage.test.js
+
 import React from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';

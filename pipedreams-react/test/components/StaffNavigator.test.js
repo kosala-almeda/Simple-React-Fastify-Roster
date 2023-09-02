@@ -1,7 +1,9 @@
-/**
+/*
  * @jest-environment jsdom
+ * 
+ * Testing pipedreams-react/src/components/StaffNavigator.js
  */
-// /test/components/StaffNavigator.test.js
+
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { MemoryRouter, Router } from 'react-router-dom';

@@ -1,5 +1,7 @@
 /**
- *  @jest-environment jsdom
+ * @jest-environment jsdom
+ * 
+ * Testing pipedreams-react/src/App.js
  */
 
 import React from 'react';

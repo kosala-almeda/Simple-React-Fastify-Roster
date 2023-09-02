@@ -1,12 +1,5 @@
+/* custom CSS in addition to bootstrap */
+
 .App {
   text-align: center;
-}
-
-.selected-btn {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-.btn {
-  vertical-align: middle;
 }

@@ -1,7 +1,9 @@
-/**
+/*
  * @jest-environment jsdom
+ * 
+ * Testing pipedreams-react/src/components/DayNavigator.js
  */
-// /test/components/DayNavigator.test.js
+
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';

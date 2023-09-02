@@ -1,7 +1,9 @@
-/**
+/*
  * @jest-environment jsdom
+ * 
+ * Testing pipedreams-react/src/components/StaffList.js
  */
-// /test/components/StaffList.test.js
+
 import React from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';

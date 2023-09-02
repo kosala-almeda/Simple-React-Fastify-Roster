@@ -1,14 +1,18 @@
-// /test/services/StaffService.test.js
+/*
+ *
+ * Testing pipedreams-react/src/pages/RosterPage.js
+ */
+
 import { fetchStaffData } from '../../src/services/StaffService';
 
 describe('fetchStaffData', () => {
-  // Mock the global fetch function
   beforeEach(() => {
+    // Mock the global fetch function
     global.fetch = jest.fn();
   });
 
-  // Clean up after each test
   afterEach(() => {
+    // Clean up after each test
     jest.clearAllMocks();
   });
 
@@ -26,7 +30,6 @@ describe('fetchStaffData', () => {
     expect(global.fetch).toHaveBeenCalledTimes(1);
     expect(global.fetch).toHaveBeenCalledWith(`${process.env.REACT_APP_API_BASE_URL}/Get${staffType}`);
 
-    // Check that the function returns the expected data
     expect(result).toEqual(mockData);
   });
 
@@ -45,7 +48,6 @@ describe('fetchStaffData', () => {
     expect(global.fetch).toHaveBeenCalledTimes(1);
     expect(global.fetch).toHaveBeenCalledWith(`${process.env.REACT_APP_API_BASE_URL}/Get${staffType}?day=${day}`);
   
-    // Check that the function returns the expected data
     expect(result).toEqual(mockData);
   });
   
@@ -63,10 +65,10 @@ describe('fetchStaffData', () => {
     expect(global.fetch).toHaveBeenCalledTimes(1);
     expect(global.fetch).toHaveBeenCalledWith(`${process.env.REACT_APP_API_BASE_URL}/Get${staffType}`);
 
-    // Check that the function returns null in case of an error
     expect(result).toBeNull();
     expect(consoleErrorSpy).toHaveBeenCalled();
 
+    // Unsuppress console.error
     consoleErrorSpy.mockRestore();
   });
 });

@@ -1,10 +1,17 @@
-// HomePage.js
+/*
+ * pipedreams-react/src/pages/HomePage.js
+ * 
+ */
 
 import React from 'react';
 import StaffNavigator from '../components/StaffNavigator';
 
-
+/**
+ * Homepage for root path
+ */
 function HomePage({staffTypes}) {
+
+    // Title and staff type buttons
     return (
       <div className="container mt-3">
         <h2 className='text-center fw-bold'>the Staff Roster</h2>

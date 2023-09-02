@@ -1,22 +1,34 @@
-// utils/dateUtils.js
-const daysOfWeek = Object.freeze(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']);
+/*
+ * pipedreams-react/src/utils/dateUtils.js
+ * 
+ */
 
+export const DAYS = Object.freeze(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']);
+
+/**
+ * Get prevous day according to #DAYS
+ * @param currentDay must be one of #DAYS
+ */
 export function previousDay(currentDay) {
-  const currentIndex = daysOfWeek.indexOf(currentDay);
+  const currentIndex = DAYS.indexOf(currentDay);
   if (currentIndex === 0) {
-    return daysOfWeek[daysOfWeek.length - 1]
+    // return last day if current is first
+    return DAYS[DAYS.length - 1]
   } else {
-    const previousIndex = (currentIndex - 1);
-    return daysOfWeek[previousIndex];
+    return DAYS[currentIndex - 1];
   }
 }
 
+/**
+ * Get next day according to #DAYS
+ * @param currentDay must be one of #DAYS
+ */
 export function nextDay(currentDay) {
-  const currentIndex = daysOfWeek.indexOf(currentDay);
-  if (currentIndex === daysOfWeek.length - 1) {
-    return daysOfWeek[0]
+  const currentIndex = DAYS.indexOf(currentDay);
+  if (currentIndex === DAYS.length - 1) {
+    // return first day if current is last
+    return DAYS[0]
   } else {
-    const nextIndex = (currentIndex + 1);
-    return daysOfWeek[nextIndex];
+    return DAYS[currentIndex + 1];
   }
 }
