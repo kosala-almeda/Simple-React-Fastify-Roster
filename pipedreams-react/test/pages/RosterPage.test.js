@@ -32,6 +32,32 @@ describe('RosterPage', () => {
       expect(container).toBeTruthy();
     });
   });
-  
+
+  it('renders without errors', async () => {
+    await act(async () => {
+      const { container } = render(
+        <DayContext.Provider value={contextValue}>
+          <RosterPage staffType="Waiters" staffTypes={['Waiters', 'Cooks']} />
+        </DayContext.Provider>
+      );
+      expect(container).toBeTruthy();
+    });
+  });
+
+  it('renders StaffNavigator component', async () => {
+    await act(async () => {
+      const { getAllByText } = render(
+        <DayContext.Provider value={contextValue}>
+          <RosterPage staffType="Waiters" staffTypes={['Waiters', 'Cooks']} />
+        </DayContext.Provider>
+      );
+    });
+
+    const cooksButton = screen.getAllByText('Cooks').filter(e => e.tagName === 'BUTTON');
+    expect(cooksButton[0]).toBeInTheDocument();
+    const waitersButton = screen.getAllByText('Waiters').filter(e => e.tagName === 'BUTTON');
+    expect(waitersButton[0]).toBeInTheDocument();
+  });
+
 });
 

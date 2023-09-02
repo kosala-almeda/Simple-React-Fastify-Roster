@@ -30,6 +30,25 @@ describe('fetchStaffData', () => {
     expect(result).toEqual(mockData);
   });
 
+  it('fetches staff data successfully with day', async () => {
+    // Mock a successful fetch response
+    const mockData = { Monday: ['John', 'Jane'] };
+    global.fetch.mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve(mockData),
+    });
+  
+    const staffType = 'Waiters';
+    const day = 'Monday';
+    const result = await fetchStaffData(staffType, day);
+  
+    expect(global.fetch).toHaveBeenCalledTimes(1);
+    expect(global.fetch).toHaveBeenCalledWith(`${process.env.REACT_APP_API_BASE_URL}/Get${staffType}?day=${day}`);
+  
+    // Check that the function returns the expected data
+    expect(result).toEqual(mockData);
+  });
+  
   it('handles network errors', async () => {
     
     // Suppress console.error during the test

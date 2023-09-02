@@ -13,25 +13,26 @@ function StaffPage({ staffType, staffTypes }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      setStaffLoading(true)
-      const data = await fetchStaffData(staffType);
+      setStaffLoading(true);
+      const data = await fetchStaffData({
+        staffType,
+        day: currentDay.toLowerCase()
+      });
       setStaffData(data);
-      setStaffLoading(false)
+      setStaffLoading(false);
     };
 
     fetchData();
-  }, [staffType]);
+  }, [staffType, currentDay]);
 
-  const handleDayChange = (newDay) => {
-    setCurrentDay(newDay);
-  };
+  const handleDayChange = (newDay) => setCurrentDay(newDay);
 
   return (
     <div className="container mt-3">
       <div className="bg-light">
         <h2 className="text-center fw-bold">{staffType}</h2>
       </div>
-      
+
       <DayNavigator
         currentDay={currentDay}
         handleDayChange={handleDayChange}
