@@ -5,19 +5,33 @@ import { getStaffByType } from '../../src/db/staffRepository.js';
 describe('getStaffByType', () => {
   it('should return staff data', async () => {
 
-    const type = 'type1';
+    const type = 'cooks';
 
     const staffCollection = {
-      findOne: jest.fn().mockResolvedValue({ type, data: ['staff1', 'staff2'] }),
+      findOne: jest.fn().mockResolvedValue({ type, data: { Monday: ['John', 'Jane'] } }),
     };
 
     const request = {};
     const reply = {};
 
-    const result = await getStaffByType({staffCollection, type});
+    const result = await getStaffByType({ staffCollection, type });
 
-    expect(staffCollection.findOne).toHaveBeenCalledWith({ type });
-    expect(result).toEqual(['staff1', 'staff2']);
+    expect(staffCollection.findOne).toHaveBeenCalledWith({ type }, { projection: { data: 1 } });
+    expect(result).toEqual({ Monday: ['John', 'Jane'] });
+  });
+
+  it('should return staff data for a specific day', async () => {
+    const type = 'cooks';
+    const day = 'Monday';
+
+    const staffCollection = {
+      findOne: jest.fn().mockResolvedValue({ type, data: { [day]: ['John', 'Jane'] } }),
+    };
+
+    const result = await getStaffByType({ staffCollection, type, day });
+
+    expect(staffCollection.findOne).toHaveBeenCalledWith({ type }, { projection: { [`data.${day}`]: 1 } });
+    expect(result).toEqual({ [day]: ['John', 'Jane'] });
   });
 
   it('should handle missing document', async () => {
@@ -27,7 +41,7 @@ describe('getStaffByType', () => {
     const request = {};
     const reply = {};
 
-    const result = await getStaffByType({staffCollection, type: 'type2'});
+    const result = await getStaffByType({ staffCollection, type: 'cooks' });
 
     expect(result).toBeNull();
   });

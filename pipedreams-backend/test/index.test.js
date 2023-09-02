@@ -36,7 +36,7 @@ describe('Server Integration Tests', () => {
   });
 
   afterAll(async () => {
-    server.app.close();
+    await server.app.close();
   });
 
   it('should spinup a local server', ()=>{

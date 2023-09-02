@@ -12,10 +12,6 @@ import { getWaitersHandler } from './routes/waiters.js';
 
 const createApp = () => {
     const app = fastify({ logger: true });
-    app.addHook('onSend', (request, reply, payload, next) => {
-        reply.header('Access-Control-Allow-Origin', '*');
-        next();
-    });
     return app;
 };
 
@@ -33,11 +29,11 @@ const startServer = async (app) => {
         });
     } catch (err) {
         console.error(err);
-        process.exit(1);
+        throw err;
     }
 };
 
 const app = createApp();
 const address = startServer(app);
 
-export default {app, address};
+export {app, address};

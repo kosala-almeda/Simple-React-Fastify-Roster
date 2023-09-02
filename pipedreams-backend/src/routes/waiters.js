@@ -4,6 +4,11 @@ import { getStaffByType } from '../db/staffRepository.js';
 
 export function getWaitersHandler({ staffCollection }) {
   return async (request, reply) => {
-    return await getStaffByType({staffCollection, type: 'waiters'});
+    const { query } = request;
+    return await getStaffByType({
+      staffCollection,
+      type: 'waiters',
+      day: query ? query.day : undefined
+    });
   };
 }
